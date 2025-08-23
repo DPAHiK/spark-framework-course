@@ -1,13 +1,20 @@
 from pyspark.sql import SparkSession
 
+DB_URL = "jdbc:postgresql://pagila:5432/postgres"
+
 spark = SparkSession.builder \
     .appName("MyPySparkApp") \
     .getOrCreate()
 spark.sparkContext.setLogLevel("ERROR")
 
-# Пример обработки данных
-data = [("Alice", 25), ("Bob", 30)]
-df = spark.createDataFrame(data, ["name", "age"])
+properties = {
+    "user": "postgres",
+    "password": "123456",
+    "driver": "org.postgresql.Driver" 
+}
+
+df = spark.read.jdbc(url=DB_URL, table="film", properties=properties)
+
 df.show()
 
 spark.stop()

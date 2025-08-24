@@ -3,7 +3,7 @@ services:
     build: 
       context: .
       dockerfile: Dockerfile
-    container_name: pyspark_container
+    container_name: pyspark
     environment:
       - PYSPARK_PYTHON=python3
     ports:
